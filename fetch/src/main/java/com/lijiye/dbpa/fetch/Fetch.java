@@ -30,27 +30,8 @@ public class Fetch {
 
 
     public static void main(String[] args) throws ParseException {
-        Options options = addOptions();
-        CommandLine commandLine = parseOptions(options, args);
-        if (commandLine.hasOption("h")) {
-            HelpFormatter helpFormatter = new HelpFormatter();
-            helpFormatter.printHelp("Options Tip", options);
-            return;
-        }
         String filename = Fetch.class.getResource(DEFAULT_CONFIGURATION_FILE).getPath();
-        Fetch fetch = new Fetch(commandLine.getOptionValue("c", filename));
+        Fetch fetch = new Fetch(filename);
     }
 
-    private static Options addOptions() {
-        Options options = new Options();
-        options.addOption("h", false, "Print help for dbpa-fetch module.");
-        options.addOption("c", false, "Specify the configuration file.");
-        return options;
-    }
-
-    private static CommandLine parseOptions(@NotNull Options options, String[] args) throws ParseException {
-        DefaultParser parser = new DefaultParser();
-        CommandLine commandLine = parser.parse(options, args);
-        return commandLine;
-    }
 }

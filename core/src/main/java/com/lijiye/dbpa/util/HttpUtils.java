@@ -1,16 +1,14 @@
 package com.lijiye.dbpa.util;
 
 
-import com.google.common.base.Joiner;
-import com.sun.istack.internal.NotNull;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.message.BasicNameValuePair;
 
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
