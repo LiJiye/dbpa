@@ -11,28 +11,27 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Created by lijiye on 17-7-26.
  */
-public class Collect implements Runnable{
+public class Collecter implements Runnable {
     private int threadNumber = 20;
     private LinkedBlockingQueue<Runnable> queue;
-    private final static Logger logger = Logger.getLogger(Collect.class);
+    private final static Logger logger = Logger.getLogger(Collecter.class);
 
-    public Collect(int threadNumber) {
+    public Collecter(int threadNumber) {
         queue = new LinkedBlockingQueue<>();
         this.threadNumber = threadNumber;
     }
 
 
     @Override
-    public void run(){
+    public void run() {
         ExecutorService executorService = Executors.newFixedThreadPool(threadNumber);
         while (true) {
-            Runnable runnable = null;
             try {
-                runnable = queue.take();
+                Runnable runnable = queue.take();
+                executorService.execute(runnable);
             } catch (InterruptedException e) {
                 logger.error(e);
             }
-            executorService.execute(runnable);
         }
     }
 

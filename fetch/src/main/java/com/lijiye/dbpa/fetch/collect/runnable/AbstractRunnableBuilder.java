@@ -1,31 +1,33 @@
-package com.lijiye.dbpa.fetch.collect;
+package com.lijiye.dbpa.fetch.collect.runnable;
+
+import com.lijiye.dbpa.fetch.collect.Collecter;
 
 import java.util.List;
 
 /**
  * Created by lijiye on 17-7-27.
  */
-public abstract class BaseRunnableBuilder implements Runnable{
+public abstract class AbstractRunnableBuilder implements Runnable{
     private enum Phase {
         FIRST, SECOND
     }
     private int number;
     private int size;
     private Phase phase;
-    private Collect collect;
+    private Collecter collecter;
 
-    public BaseRunnableBuilder(int size) {
+    public AbstractRunnableBuilder(int size) {
         number = 1;
         phase = Phase.FIRST;
         this.size = size * 2;
-        collect = new Collect(size);
+        collecter = new Collecter(size);
     }
 
     public void run() {
-        new Thread(collect).start();
+        new Thread(collecter).start();
         while (true) {
             List<Runnable> runnables = build(number);
-            int ret = collect.put(runnables);
+            int ret = collecter.put(runnables);
             if (ret < size) {
                 increase();
             } else {

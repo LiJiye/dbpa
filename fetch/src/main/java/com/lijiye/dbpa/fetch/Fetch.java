@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 public class Fetch {
     private Configuration configuration;
 
+    private static Fetch fetch;
     private static String DEFAULT_CONFIGURATION_FILE = "configuration.properties";
     private static Logger logger = Logger.getLogger(Fetch.class);
 
@@ -28,10 +29,17 @@ public class Fetch {
         }
     }
 
+    public Configuration getConfiguration() {
+        return configuration;
+    }
 
     public static void main(String[] args) throws ParseException {
         String filename = Fetch.class.getResource(DEFAULT_CONFIGURATION_FILE).getPath();
-        Fetch fetch = new Fetch(filename);
+        fetch = new Fetch(filename);
+    }
+
+    public static Fetch getFetch() {
+        return fetch;
     }
 
 }
