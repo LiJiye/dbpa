@@ -1,25 +1,31 @@
 package com.lijiye.dbpa.fetch.collect.runnable;
 
+import com.lijiye.dbpa.fetch.Fetch;
 import com.lijiye.dbpa.fetch.collect.Collecter;
 
 import java.util.List;
 
 /**
+ * 数据采集线程的生产者
+ *
  * Created by lijiye on 17-7-27.
  */
 public abstract class AbstractRunnableBuilder implements Runnable{
     private enum Phase {
         FIRST, SECOND
     }
+
+    private static final String THREAD_NUMBER = "thread.number";
+
     private int number;
     private int size;
     private Phase phase;
     private Collecter collecter;
 
-    public AbstractRunnableBuilder(int size) {
+    public AbstractRunnableBuilder() {
         number = 1;
         phase = Phase.FIRST;
-        this.size = size * 2;
+        size = Fetch.getFetch().getConfiguration().getInt(THREAD_NUMBER) * 2;
         collecter = new Collecter(size);
     }
 
@@ -31,6 +37,9 @@ public abstract class AbstractRunnableBuilder implements Runnable{
             if (ret < size) {
                 increase();
             } else {
+                if (phase == Phase.FIRST) {
+                    phase = Phase.SECOND;
+                }
                 decrease();
             }
         }

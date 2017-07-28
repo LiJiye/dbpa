@@ -9,6 +9,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
+ * 用于数据采集，为一个线程池
+ *
  * Created by lijiye on 17-7-26.
  */
 public class Collecter implements Runnable {
