@@ -1,11 +1,15 @@
 package com.lijiye.dbpa.fetch;
 
+import com.lijiye.dbpa.fetch.builer.GetMatchDetailRunnableBuilder;
 import com.lijiye.dbpa.util.ConfigurationBuilder;
-import com.sun.istack.internal.NotNull;
+import com.lijiye.dbpa.util.Counter;
 import org.apache.commons.cli.*;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.ex.ConfigurationException;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by lijiye on 17-7-23.
@@ -14,18 +18,28 @@ public class Fetch {
     private Configuration configuration;
 
     private static Fetch fetch;
-    private static String DEFAULT_CONFIGURATION_FILE = "configuration.properties";
-    private static Logger logger = Logger.getLogger(Fetch.class);
+    private static final String DEFAULT_CONFIGURATION_FILE = "configuration.properties";
+    private static final Logger logger = LoggerFactory.getLogger(Fetch.class);
 
 
-    private Fetch(String  filename) {
+    private Fetch() {
+        String filename = Fetch.class.getClassLoader().getResource(DEFAULT_CONFIGURATION_FILE).getPath();
         try {
             configuration = ConfigurationBuilder.build(filename);
         } catch (ConfigurationException e) {
-            logger.warn(e);
-            logger.warn(String.format("Cannot find the configuration file %s. " +
-                    "The system will use the default value.", filename));
-            configuration = ConfigurationBuilder.build();
+            logger.warn(e.toString());
+            logger.warn("Cannot find the configuration file {}. The system will use the default value.", filename);
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    private void start() {
+        GetMatchDetailRunnableBuilder getMatchDetailRunnableBuilder = new GetMatchDetailRunnableBuilder(new Counter(3021004225L));
+        new Thread(getMatchDetailRunnableBuilder).start();
+        try {
+            TimeUnit.HOURS.sleep(1);
+        } catch (InterruptedException e) {
+            logger.error(e.toString());
         }
     }
 
@@ -34,8 +48,8 @@ public class Fetch {
     }
 
     public static void main(String[] args) throws ParseException {
-        String filename = Fetch.class.getResource(DEFAULT_CONFIGURATION_FILE).getPath();
-        fetch = new Fetch(filename);
+        fetch = new Fetch();
+        fetch.start();
     }
 
     public static Fetch getFetch() {

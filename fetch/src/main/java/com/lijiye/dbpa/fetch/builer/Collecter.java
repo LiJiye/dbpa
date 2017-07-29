@@ -1,6 +1,7 @@
 package com.lijiye.dbpa.fetch.builer;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -15,7 +16,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class Collecter implements Runnable {
     private int threadNumber = 20;
     private LinkedBlockingQueue<Runnable> queue;
-    private final static Logger logger = Logger.getLogger(Collecter.class);
+    private final static Logger logger = LoggerFactory.getLogger(Collecter.class);
 
     public Collecter(int threadNumber) {
         queue = new LinkedBlockingQueue<>();
@@ -31,7 +32,7 @@ public class Collecter implements Runnable {
                 Runnable runnable = queue.take();
                 executorService.execute(runnable);
             } catch (InterruptedException e) {
-                logger.error(e);
+                logger.error(e.toString());
             }
         }
     }
@@ -41,7 +42,7 @@ public class Collecter implements Runnable {
             try {
                 queue.put(runnable);
             } catch (InterruptedException e) {
-                logger.error(e);
+                logger.error(e.toString());
             }
         });
         return queue.size();
