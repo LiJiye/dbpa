@@ -1,8 +1,7 @@
-package com.lijiye.dbpa.fetch.collect;
+package com.lijiye.dbpa.fetch.builer;
 
 import org.apache.log4j.Logger;
 
-import javax.security.auth.login.Configuration;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

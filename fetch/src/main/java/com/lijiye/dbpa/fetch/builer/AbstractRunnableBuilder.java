@@ -1,7 +1,6 @@
-package com.lijiye.dbpa.fetch.collect.runnable;
+package com.lijiye.dbpa.fetch.builer;
 
 import com.lijiye.dbpa.fetch.Fetch;
-import com.lijiye.dbpa.fetch.collect.Collecter;
 
 import java.util.List;
 
@@ -55,6 +54,14 @@ public abstract class AbstractRunnableBuilder implements Runnable{
         } else {
             number = number + 1;
         }
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     protected abstract List<Runnable> build(int number);
