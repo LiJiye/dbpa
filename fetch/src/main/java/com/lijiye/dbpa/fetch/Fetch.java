@@ -1,6 +1,6 @@
 package com.lijiye.dbpa.fetch;
 
-import com.lijiye.dbpa.fetch.builer.GetMatchDetailRunnableBuilder;
+import com.lijiye.dbpa.fetch.builder.GetMatchDetailRunnableBuilder;
 import com.lijiye.dbpa.util.ConfigurationBuilder;
 import com.lijiye.dbpa.util.Counter;
 import org.apache.commons.cli.*;

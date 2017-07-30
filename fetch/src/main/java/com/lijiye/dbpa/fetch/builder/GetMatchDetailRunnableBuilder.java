@@ -1,4 +1,4 @@
-package com.lijiye.dbpa.fetch.builer;
+package com.lijiye.dbpa.fetch.builder;
 
 import com.lijiye.dbpa.fetch.Fetch;
 import com.lijiye.dbpa.fetch.request.GetMatchDetailRequest;

@@ -1,4 +1,4 @@
-package com.lijiye.dbpa.fetch.builer;
+package com.lijiye.dbpa.fetch.builder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
