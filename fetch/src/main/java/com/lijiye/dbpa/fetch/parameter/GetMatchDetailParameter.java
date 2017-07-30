@@ -9,7 +9,7 @@ import java.util.List;
  */
 
 @Data
-public class GetMatchDetailParameter extends Parameter{
+public class GetMatchDetailParameter extends Parameter {
     private static final String MATCH_ID = "match_id=";
     private long matchId;
 
@@ -20,7 +20,7 @@ public class GetMatchDetailParameter extends Parameter{
 
     @Override
     public List<String> getList() {
-        List<String> ret =  super.getList();
+        List<String> ret = super.getList();
         ret.add(MATCH_ID + matchId);
         return ret;
     }

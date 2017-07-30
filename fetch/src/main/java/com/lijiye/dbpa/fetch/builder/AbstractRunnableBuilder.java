@@ -9,7 +9,7 @@ import java.util.List;
  *
  * Created by lijiye on 17-7-27.
  */
-public abstract class AbstractRunnableBuilder implements Runnable{
+public abstract class AbstractRunnableBuilder implements Runnable {
     private enum Phase {
         FIRST, SECOND
     }

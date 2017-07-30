@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 用于生产${dota2.url.get_match_detail}线程
- * <p>
+ *
  * Created by lijiye on 17-7-28.
  */
 public class GetMatchDetailRunnableBuilder extends AbstractRunnableBuilder {

@@ -1,6 +1,5 @@
 package com.lijiye.dbpa.type;
 
-import com.google.common.base.Optional;
 
 /**
  * Created by lijiye on 17-7-30.

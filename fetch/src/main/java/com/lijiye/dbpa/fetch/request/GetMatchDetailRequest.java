@@ -17,9 +17,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import static com.lijiye.dbpa.pojo.MatchDetail.*;
 
 
 /**
@@ -89,13 +86,13 @@ public class GetMatchDetailRequest implements Runnable, Request {
     }
 
     private boolean setHeroId(List<Integer> dest, JSONArray jsonArray, int offset) {
-       for (int i = offset; i < offset + 5; i++) {
-           JSONObject player = jsonArray.getJSONObject(i);
-           LeaverStatus leaverStatus = LeaverStatus.fromId(player.getInteger(LEAVER_STATUS));
-           if (leaverStatus == null) return false;
-           dest.add(player.getInteger(HERO_ID));
-       }
-       return true;
+        for (int i = offset; i < offset + 5; i++) {
+            JSONObject player = jsonArray.getJSONObject(i);
+            LeaverStatus leaverStatus = LeaverStatus.fromId(player.getInteger(LEAVER_STATUS));
+            if (leaverStatus == null) return false;
+            dest.add(player.getInteger(HERO_ID));
+        }
+        return true;
     }
 
     @Override

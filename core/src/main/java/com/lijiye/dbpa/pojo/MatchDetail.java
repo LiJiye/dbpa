@@ -1,8 +1,5 @@
 package com.lijiye.dbpa.pojo;
 
-import com.lijiye.dbpa.type.GameMode;
-import com.lijiye.dbpa.type.LeaverStatus;
-import com.lijiye.dbpa.type.LobbyType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

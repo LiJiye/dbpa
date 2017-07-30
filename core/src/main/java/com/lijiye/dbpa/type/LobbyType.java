@@ -1,8 +1,5 @@
 package com.lijiye.dbpa.type;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * Created by lijiye on 17-7-30.
