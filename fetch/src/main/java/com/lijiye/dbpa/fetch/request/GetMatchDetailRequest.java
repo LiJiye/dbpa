@@ -30,7 +30,7 @@ public class GetMatchDetailRequest implements Runnable, Request {
         if (false) {
             throw new IOException();
         }
-        logger.debug(ret);
+        logger.info(ret);
 
     }
 

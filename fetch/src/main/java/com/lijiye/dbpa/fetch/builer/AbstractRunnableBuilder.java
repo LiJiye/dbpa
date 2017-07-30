@@ -15,16 +15,19 @@ public abstract class AbstractRunnableBuilder implements Runnable{
     }
 
     private static final String THREAD_NUMBER = "thread.number";
+    private static int size = Fetch.getFetch().getConfiguration().getInt(THREAD_NUMBER) * 2;
 
     private int number;
-    private int size;
     private Phase phase;
     private Collecter collecter;
 
-    public AbstractRunnableBuilder() {
+
+    public AbstractRunnableBuilder(int size) {
         number = 1;
         phase = Phase.FIRST;
-        size = Fetch.getFetch().getConfiguration().getInt(THREAD_NUMBER) * 2;
+        if (size != -1) {
+            this.size = size * 2;
+        }
         collecter = new Collecter(size);
     }
 
