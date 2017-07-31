@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class GetMatchDetailRunnableBuilder extends AbstractRunnableBuilder {
     private static final String URL = "dota2.url.get_match_history";
-    private static final String THREAD_NUMBER = "thread.get_match_detail.number";
+    private static final String THREAD_NUMBER = "system.thread.get_match_detail.number";
     private static final int size = Fetch.getFetch().getConfiguration().getInt(THREAD_NUMBER, -1);
 
     private Counter counter;

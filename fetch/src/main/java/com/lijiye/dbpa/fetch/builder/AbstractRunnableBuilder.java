@@ -14,7 +14,7 @@ public abstract class AbstractRunnableBuilder implements Runnable {
         FIRST, SECOND
     }
 
-    private static final String THREAD_NUMBER = "thread.number";
+    private static final String THREAD_NUMBER = "system.thread.number";
     private static int size = Fetch.getFetch().getConfiguration().getInt(THREAD_NUMBER) * 2;
 
     private int number;
