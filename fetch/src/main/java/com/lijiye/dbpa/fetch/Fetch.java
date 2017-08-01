@@ -29,7 +29,6 @@ public class Fetch {
         } catch (ConfigurationException e) {
             logger.warn(e.toString());
             logger.warn("Cannot find the configuration file {}. The system will use the default value.", filename);
-            throw new UnsupportedOperationException();
         }
     }
 
