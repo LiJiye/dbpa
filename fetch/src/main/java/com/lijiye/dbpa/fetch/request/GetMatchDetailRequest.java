@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lijiye.dbpa.fetch.Fetch;
 import com.lijiye.dbpa.fetch.parameter.GetMatchDetailParameter;
-import com.lijiye.dbpa.pojo.MatchDetail;
+import com.lijiye.dbpa.thrift.MatchDetail;
 import com.lijiye.dbpa.type.GameMode;
 import com.lijiye.dbpa.type.LeaverStatus;
 import com.lijiye.dbpa.type.LobbyType;
@@ -67,8 +67,8 @@ public class GetMatchDetailRequest implements Runnable, Request {
             GameMode gameMode = GameMode.fromId(json.getInteger(GAME_MODE));
             if (gameMode == null) return;
 
-            List<Integer> winners = new ArrayList<>();
-            List<Integer> losers = new ArrayList<>();
+            List<Short> winners = new ArrayList<>();
+            List<Short> losers = new ArrayList<>();
             JSONArray playersTmp = json.getJSONArray(PLAYERS);
             if (radiantWin) {
                 if (!setHeroId(winners, playersTmp, 0)) return;
@@ -85,12 +85,12 @@ public class GetMatchDetailRequest implements Runnable, Request {
         }
     }
 
-    private boolean setHeroId(List<Integer> dest, JSONArray jsonArray, int offset) {
+    private boolean setHeroId(List<Short> dest, JSONArray jsonArray, int offset) {
         for (int i = offset; i < offset + 5; i++) {
             JSONObject player = jsonArray.getJSONObject(i);
             LeaverStatus leaverStatus = LeaverStatus.fromId(player.getInteger(LEAVER_STATUS));
             if (leaverStatus == null) return false;
-            dest.add(player.getInteger(HERO_ID));
+            dest.add(player.getShort(HERO_ID));
         }
         return true;
     }
