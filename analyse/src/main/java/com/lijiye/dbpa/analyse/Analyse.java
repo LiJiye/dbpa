@@ -10,7 +10,7 @@ import com.lijiye.dbpa.thrift.DbpaService;
 import com.lijiye.dbpa.thrift.MatchDetail;
 import com.lijiye.dbpa.util.ConfigurationBuilder;
 import io.netty.internal.tcnative.SessionTicketKey;
-import org.apache.commons.configuration2.Configuration
+import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
@@ -18,20 +18,19 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static com.lijiye.dbpa.analyse.Config.*;
+
 
 /**
  * Created by lijiye on 17-8-1.
  */
 public class Analyse {
-    private static final String DEFAULT_CONFIGURATION_FILE = "configuration.properties";
-    private static final Integer DEFAULT_PORT = 8080;
-    private static final Integer DEFAULT_TIMEOUT = 5000;
-    private static final String PORT = "system.thrift.server.port";
-    private static final String TIMEOUT = "system.thrift.server.timeout";
+
     private static final Logger logger = LoggerFactory.getLogger(Analyse.class);
 
     private static Analyse analyse;
     private Configuration configuration;
+    private NiftyBootstrap bootstrap;
 
     private Analyse() {
         String filename = Analyse.class.getClassLoader().getResource(DEFAULT_CONFIGURATION_FILE).getPath();
@@ -44,10 +43,24 @@ public class Analyse {
     }
 
     private void start() {
-        int port = configuration.getInt(PORT, DEFAULT_PORT);
-        int timeout = configuration.getInt(TIMEOUT, DEFAULT_TIMEOUT);
-        NiftyModule niftyModule = new DbpaNiftyModule(port, timeout);
+        NiftyModule niftyModule = new DbpaNiftyModule();
+        bootstrap = Guice.createInjector(
+                Stage.PRODUCTION,
+                new DbpaNiftyModule()
+        ).getInstance(NiftyBootstrap.class);
+        bootstrap.start();
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                bootstrap.stop();
+            }
+        });
     }
+
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+
     public static void main(String[] args) {
         analyse = new Analyse();
         analyse.start();
@@ -56,4 +69,6 @@ public class Analyse {
     public static Analyse getAnalyse() {
         return analyse;
     }
+
+
 }
