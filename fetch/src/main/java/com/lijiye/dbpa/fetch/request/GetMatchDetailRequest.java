@@ -5,12 +5,17 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lijiye.dbpa.fetch.Fetch;
 import com.lijiye.dbpa.fetch.parameter.GetMatchDetailParameter;
+import com.lijiye.dbpa.thrift.DbpaService;
 import com.lijiye.dbpa.thrift.MatchDetail;
 import com.lijiye.dbpa.type.GameMode;
 import com.lijiye.dbpa.type.LeaverStatus;
 import com.lijiye.dbpa.type.LobbyType;
 import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;
+import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.protocol.TProtocol;
+import org.apache.thrift.transport.TSocket;
+import org.apache.thrift.transport.TTransport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,6 +84,14 @@ public class GetMatchDetailRequest implements Runnable, Request {
             }
 
             MatchDetail matchDetail = new MatchDetail(winners, losers);
+            TTransport tTransport = new TSocket("localhost", 8080);
+            tTransport.open();
+            TProtocol protocol = new TBinaryProtocol(tTransport);
+            DbpaService.Client client = new DbpaService.Client(protocol);
+            List<MatchDetail> matchDetails = new ArrayList<>();
+            matchDetails.add(matchDetail);
+            client.add(matchDetails);
+            tTransport.close();
             System.out.println();
         } catch (Exception e) {
             logger.warn(e.toString());
