@@ -33,7 +33,8 @@ public class Fetch {
     }
 
     private void start() {
-        GetMatchDetailRunnableBuilder getMatchDetailRunnableBuilder = new GetMatchDetailRunnableBuilder(new Counter(3021004225L));
+        GetMatchDetailRunnableBuilder getMatchDetailRunnableBuilder
+                = new GetMatchDetailRunnableBuilder(new Counter(3021004225L));
         new Thread(getMatchDetailRunnableBuilder).start();
         try {
             TimeUnit.HOURS.sleep(1);
