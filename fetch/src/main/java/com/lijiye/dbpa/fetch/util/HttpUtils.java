@@ -1,4 +1,4 @@
-package com.lijiye.dbpa.util;
+package com.lijiye.dbpa.fetch.util;
 
 
 import org.apache.http.HttpResponse;

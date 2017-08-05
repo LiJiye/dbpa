@@ -5,17 +5,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lijiye.dbpa.fetch.Fetch;
 import com.lijiye.dbpa.fetch.parameter.GetMatchDetailParameter;
-import com.lijiye.dbpa.thrift.DbpaService;
-import com.lijiye.dbpa.thrift.MatchDetail;
-import com.lijiye.dbpa.type.GameMode;
-import com.lijiye.dbpa.type.LeaverStatus;
-import com.lijiye.dbpa.type.LobbyType;
+import com.lijiye.dbpa.fetch.type.GameMode;
+import com.lijiye.dbpa.fetch.type.LeaverStatus;
+import com.lijiye.dbpa.fetch.type.LobbyType;
 import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TProtocol;
-import org.apache.thrift.transport.TSocket;
-import org.apache.thrift.transport.TTransport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.lijiye.dbpa.fetch.Config.*;
+import static com.lijiye.dbpa.fetch.util.Config.*;
 
 
 /**
@@ -75,8 +69,7 @@ public class GetMatchDetailRequest implements Runnable, Request {
                 if (!setHeroId(losers, playersTmp, 0)) return;
             }
 
-            MatchDetail matchDetail = new MatchDetail(winners, losers);
-            Fetch.getFetch().getSender().add(matchDetail);
+//            Fetch.getFetch().getSender().add(winners, losers, matchId);
         } catch (Exception e) {
             logger.warn(e.toString());
         }

@@ -9,8 +9,6 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>core</module>
-        <module>analyse</module>
         <module>fetch</module>
         <module>service</module>
     </modules>

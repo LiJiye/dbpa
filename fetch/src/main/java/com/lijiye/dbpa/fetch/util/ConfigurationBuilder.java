@@ -1,4 +1,4 @@
-package com.lijiye.dbpa.util;
+package com.lijiye.dbpa.fetch.util;
 
 import com.sun.istack.internal.NotNull;
 import org.apache.commons.configuration2.Configuration;

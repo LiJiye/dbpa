@@ -1,4 +1,4 @@
-package com.lijiye.dbpa.fetch;
+package com.lijiye.dbpa.fetch.util;
 
 /**
  * Created by lijiye on 17-8-4.
@@ -14,10 +14,8 @@ public class Config {
     public static final String RESULT = "result";
     public static final String PLAYERS = "players";
     public static final String RADIANT_WIN = "radiant_win";
-    public static final String THREAD_NUMBER = "system.thread.number";
-    public static final String GET_MATCH_DETAIL_THREAD_NUMBER = "system.thread.get_match_detail.number";
-    public static final String SENDER_THRESHOLD = "system.sender.threshold";
-    public static final String SENDER_SIZE = "system.sender.size";
-    public static final String ANALYSE_PORT = "system.analyse.port";
-    public static final String ANALYSE_HOST = "system.analyse.host";
+    public static final String THREAD_NUMBER = "system.request.number";
+    public static final String GET_MATCH_DETAIL_THREAD_NUMBER = "system.request.get_match_detail.number";
+    public static final String DOTA2_HERO_NUMBER = "dota2.hero.number";
+    public static final String CACHE_SIZE = "system.persistence.cache.size";
 }

@@ -1,4 +1,4 @@
-package com.lijiye.dbpa.type;
+package com.lijiye.dbpa.fetch.type;
 
 /**
  * Created by lijiye on 17-7-30.

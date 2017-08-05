@@ -5,7 +5,7 @@ import com.lijiye.dbpa.fetch.Fetch;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static com.lijiye.dbpa.fetch.Config.THREAD_NUMBER;
+import static com.lijiye.dbpa.fetch.util.Config.THREAD_NUMBER;
 
 /**
  * 数据采集线程的生产者

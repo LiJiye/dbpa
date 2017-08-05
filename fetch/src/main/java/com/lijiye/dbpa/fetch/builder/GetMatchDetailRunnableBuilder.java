@@ -2,12 +2,12 @@ package com.lijiye.dbpa.fetch.builder;
 
 import com.lijiye.dbpa.fetch.Fetch;
 import com.lijiye.dbpa.fetch.request.GetMatchDetailRequest;
-import com.lijiye.dbpa.util.Counter;
+import com.lijiye.dbpa.fetch.util.Counter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.lijiye.dbpa.fetch.Config.GET_MATCH_DETAIL_THREAD_NUMBER;
+import static com.lijiye.dbpa.fetch.util.Config.GET_MATCH_DETAIL_THREAD_NUMBER;
 
 /**
  * 用于生产${dota2.url.get_match_detail}线程
