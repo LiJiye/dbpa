@@ -3,6 +3,9 @@ package com.lijiye.dbpa.fetch.builder;
 import com.lijiye.dbpa.fetch.Fetch;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import static com.lijiye.dbpa.fetch.Config.THREAD_NUMBER;
 
 /**
  * 数据采集线程的生产者
@@ -14,12 +17,12 @@ public abstract class AbstractRunnableBuilder implements Runnable {
         FIRST, SECOND
     }
 
-    private static final String THREAD_NUMBER = "system.thread.number";
     private static int size = Fetch.getFetch().getConfiguration().getInt(THREAD_NUMBER) * 2;
 
     private int number;
     private Phase phase;
     private Collecter collecter;
+    private boolean isSuspend;
 
 
     public AbstractRunnableBuilder(int size) {
@@ -34,6 +37,12 @@ public abstract class AbstractRunnableBuilder implements Runnable {
     public void run() {
         new Thread(collecter).start();
         while (true) {
+            while (isSuspend) {
+                try {
+                    TimeUnit.SECONDS.sleep(10);
+                } catch (InterruptedException e) {
+                }
+            }
             List<Runnable> runnables = build(number);
             int ret = collecter.put(runnables);
             if (ret < size) {
@@ -68,4 +77,13 @@ public abstract class AbstractRunnableBuilder implements Runnable {
     }
 
     protected abstract List<Runnable> build(int number);
+
+    public void suspend() {
+        isSuspend = true;
+    }
+
+    public void proceed() {
+        isSuspend = false;
+    }
+
 }

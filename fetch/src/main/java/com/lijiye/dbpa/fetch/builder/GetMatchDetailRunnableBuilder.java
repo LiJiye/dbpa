@@ -7,15 +7,15 @@ import com.lijiye.dbpa.util.Counter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.lijiye.dbpa.fetch.Config.GET_MATCH_DETAIL_THREAD_NUMBER;
+
 /**
  * 用于生产${dota2.url.get_match_detail}线程
  *
  * Created by lijiye on 17-7-28.
  */
 public class GetMatchDetailRunnableBuilder extends AbstractRunnableBuilder {
-    private static final String URL = "dota2.url.get_match_history";
-    private static final String THREAD_NUMBER = "system.thread.get_match_detail.number";
-    private static final int size = Fetch.getFetch().getConfiguration().getInt(THREAD_NUMBER, -1);
+    private static final int size = Fetch.getFetch().getConfiguration().getInt(GET_MATCH_DETAIL_THREAD_NUMBER, -1);
 
     private Counter counter;
 

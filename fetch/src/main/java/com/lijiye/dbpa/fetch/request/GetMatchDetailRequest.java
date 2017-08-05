@@ -23,21 +23,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.lijiye.dbpa.fetch.Config.*;
+
 
 /**
  * Created by lijiye on 17-7-29.
  */
 public class GetMatchDetailRequest implements Runnable, Request {
-    private static final String INTERVAL = "?";
-    private static final String GAME_MODE = "game_mode";
-    private static final String LOBBY_TYPE = "lobby_type";
-    private static final String HUMAN_PLAYERS = "human_players";
-    private static final String LEAVER_STATUS = "leaver_status";
-    private static final String MATCH_ID = "match_id";
-    private static final String HERO_ID = "hero_id";
-    private static final String RESULT = "result";
-    private static final String PLAYERS = "players";
-    private static final String RADIANT_WIN = "radiant_win";
 
     private static final Logger logger = LoggerFactory.getLogger(GetMatchDetailParameter.class);
     private Long matchId;
