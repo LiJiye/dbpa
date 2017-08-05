@@ -16,6 +16,8 @@ public class Config {
     public static final String RADIANT_WIN = "radiant_win";
     public static final String THREAD_NUMBER = "system.thread.number";
     public static final String GET_MATCH_DETAIL_THREAD_NUMBER = "system.thread.get_match_detail.number";
-    public static final String GET_MATCH_DETAIL_THRESHOLD = "system.thread.get_match_detail.threshold";
+    public static final String SENDER_THRESHOLD = "system.sender.threshold";
     public static final String SENDER_SIZE = "system.sender.size";
+    public static final String ANALYSE_PORT = "system.analyse.port";
+    public static final String ANALYSE_HOST = "system.analyse.host";
 }

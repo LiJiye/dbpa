@@ -76,15 +76,7 @@ public class GetMatchDetailRequest implements Runnable, Request {
             }
 
             MatchDetail matchDetail = new MatchDetail(winners, losers);
-            TTransport tTransport = new TSocket("localhost", 8080);
-            tTransport.open();
-            TProtocol protocol = new TBinaryProtocol(tTransport);
-            DbpaService.Client client = new DbpaService.Client(protocol);
-            List<MatchDetail> matchDetails = new ArrayList<>();
-            matchDetails.add(matchDetail);
-            client.add(matchDetails);
-            tTransport.close();
-            System.out.println();
+            Fetch.getFetch().getSender().add(matchDetail);
         } catch (Exception e) {
             logger.warn(e.toString());
         }

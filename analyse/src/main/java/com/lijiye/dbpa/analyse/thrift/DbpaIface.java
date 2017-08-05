@@ -12,6 +12,8 @@ import java.util.List;
 public class DbpaIface implements DbpaService.Iface {
     @Override
     public short add(List<MatchDetail> matchDdetails) throws TException {
+        System.out.println(matchDdetails);
         return 0;
+
     }
 }

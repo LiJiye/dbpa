@@ -1,22 +1,16 @@
 package com.lijiye.dbpa.analyse;
 
 import com.facebook.nifty.core.NiftyBootstrap;
-import com.facebook.nifty.core.ThriftServerDefBuilder;
 import com.facebook.nifty.guice.NiftyModule;
 import com.google.inject.Guice;
 import com.google.inject.Stage;
 import com.lijiye.dbpa.analyse.thrift.DbpaNiftyModule;
-import com.lijiye.dbpa.thrift.DbpaService;
-import com.lijiye.dbpa.thrift.MatchDetail;
 import com.lijiye.dbpa.util.ConfigurationBuilder;
-import io.netty.internal.tcnative.SessionTicketKey;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.ex.ConfigurationException;
-import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
 
 import static com.lijiye.dbpa.analyse.Config.*;
 
@@ -43,7 +37,6 @@ public class Analyse {
     }
 
     private void start() {
-        NiftyModule niftyModule = new DbpaNiftyModule();
         bootstrap = Guice.createInjector(
                 Stage.PRODUCTION,
                 new DbpaNiftyModule()

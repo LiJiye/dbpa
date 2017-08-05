@@ -1,11 +1,14 @@
 package com.lijiye.dbpa.fetch;
 
 import com.lijiye.dbpa.fetch.builder.GetMatchDetailRunnableBuilder;
+import com.lijiye.dbpa.fetch.threads.Sender;
 import com.lijiye.dbpa.util.ConfigurationBuilder;
 import com.lijiye.dbpa.util.Counter;
 import org.apache.commons.cli.*;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.apache.thrift.transport.TTransportException;
+import org.jboss.netty.util.ThreadRenamingRunnable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +23,8 @@ public class Fetch {
     private static Fetch fetch;
     private static final String DEFAULT_CONFIGURATION_FILE = "configuration.properties";
     private static final Logger logger = LoggerFactory.getLogger(Fetch.class);
+    private GetMatchDetailRunnableBuilder builder;
+    private Sender sender;
 
 
     private Fetch() {
@@ -33,9 +38,8 @@ public class Fetch {
     }
 
     private void start() {
-        GetMatchDetailRunnableBuilder getMatchDetailRunnableBuilder
-                = new GetMatchDetailRunnableBuilder(new Counter(3021004225L));
-        new Thread(getMatchDetailRunnableBuilder).start();
+        new Thread(sender).start();
+        new Thread(builder).start();
         try {
             TimeUnit.HOURS.sleep(1);
         } catch (InterruptedException e) {
@@ -43,17 +47,31 @@ public class Fetch {
         }
     }
 
+    private void init() throws TTransportException {
+        sender = new Sender();
+        builder = new GetMatchDetailRunnableBuilder(new Counter(3021004225L));
+    }
+
     public Configuration getConfiguration() {
         return configuration;
     }
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, TTransportException {
         fetch = new Fetch();
+        fetch.init();
         fetch.start();
     }
+
 
     public static Fetch getFetch() {
         return fetch;
     }
 
+    public GetMatchDetailRunnableBuilder getBuilder() {
+        return builder;
+    }
+
+    public Sender getSender() {
+        return sender;
+    }
 }
