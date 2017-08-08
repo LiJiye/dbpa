@@ -14,28 +14,9 @@
     </modules>
     <properties>
         <slf4j.version>1.7.25</slf4j.version>
-        <nifty.version>0.23.0</nifty.version>
-        <netty.version>3.10.6.Final</netty.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty</artifactId>
-            <version>${netty.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-tcnative-boringssl-static</artifactId>
-            <version>2.0.5.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.thrift</groupId>
-            <artifactId>libthrift</artifactId>
-            <version>0.10.0</version>
-        </dependency>
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-configuration2</artifactId>
@@ -49,19 +30,20 @@
             <version>1.9.3</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.facebook.nifty/nifty-core -->
+
+        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
         <dependency>
-            <groupId>com.facebook.nifty</groupId>
-            <artifactId>nifty-core</artifactId>
-            <version>${nifty.version}</version>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.4.4</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
-            <groupId>com.facebook.nifty</groupId>
-            <artifactId>nifty-client</artifactId>
-            <version>${nifty.version}</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.6</version>
         </dependency>
-
 
         <dependency>
             <groupId>log4j</groupId>

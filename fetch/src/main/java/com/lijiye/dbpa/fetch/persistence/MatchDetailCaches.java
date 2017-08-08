@@ -1,14 +1,20 @@
 package com.lijiye.dbpa.fetch.persistence;
 
 import com.lijiye.dbpa.fetch.Fetch;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static com.lijiye.dbpa.fetch.util.Config.CACHE_SIZE;
 import static com.lijiye.dbpa.fetch.util.Config.DOTA2_HERO_NUMBER;
 
-public class MatchDetailCaches {
+public class MatchDetailCaches implements  Runnable{
+
+    private static final Logger logger = LoggerFactory.getLogger(MatchDetailCache.class);
+
     private int size;
     private List<MatchDetailCache> caches;
     private long lastId;
@@ -26,15 +32,21 @@ public class MatchDetailCaches {
     public void add(Short win, Short lost, Long matchId) {
         lastId = lastId > matchId ? lastId : matchId;
         int hashValue = hash(matchId);
-        caches.get(hashValue).add(win, lost);
+        caches.get(hashValue).add(win, lost, matchId);
     }
 
-    public void count() {
-        int heroNumber = Fetch.getFetch().getConfiguration().getInt(DOTA2_HERO_NUMBER) + 1;
-        long[][] ret = new long[heroNumber][heroNumber];
-        for (MatchDetailCache cache : caches) {
-            cache.count(ret);
+
+    @Override
+    public void run() {
+        while (true) {
+            for (MatchDetailCache cache: caches) {
+                cache.persistence();
+            }
+            try {
+                TimeUnit.HOURS.sleep(1);
+            } catch (InterruptedException e) {
+                logger.error(e.toString());
+            }
         }
     }
-
 }
